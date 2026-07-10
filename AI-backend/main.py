@@ -1,13 +1,12 @@
 from fastapi import FastAPI
-import uvicorn
+from config.db import SessionLocal
 
 app = FastAPI()
 
-
 @app.get("/")
-async def root():
-    return {"message": "Testing!"}
-
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+def home():
+    db = SessionLocal()
+    try:
+        return {"message": "Connected to Neon PostgreSQL"}
+    finally:
+        db.close()
