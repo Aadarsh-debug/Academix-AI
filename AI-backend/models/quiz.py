@@ -1,18 +1,25 @@
-from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
+from typing import List, Optional
 
-from config.db import Base
+from pydantic import BaseModel, Field
 
 
-class Quiz(Base):
-    __tablename__ = "quizzes"
+class Question(BaseModel):
+    id: Optional[str] = None
+    question: str
+    options: List[str]
+    correctAnswer: str
+    topic: str
+    difficulty: str
+    explanation: str
 
-    id = Column(Integer, primary_key=True, index=True)
 
-    resourceId = Column(Integer, nullable=False, index=True)
-
-    difficulty = Column(String, nullable=False)
-
-    totalQuestions = Column(Integer, nullable=False)
-
-    createdAt = Column(DateTime, default=datetime.utcnow)
+class Quiz(BaseModel):
+    resourceId: str
+    createdBy: str
+    title: str
+    difficulty: str
+    totalQuestions: int
+    questions: List[Question]
+    createdAt: datetime = Field(default_factory=datetime.utcnow)
+    updatedAt: datetime = Field(default_factory=datetime.utcnow)
