@@ -9,6 +9,10 @@ const teacherSchema = new mongoose.Schema({
         unique:true
     },
 
+    FullName:String,
+
+    phone:Number,
+
     qualification:String,
 
     specialization:String,
@@ -23,6 +27,7 @@ const teacherSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Institution",
     }
+    ref: "Institution"}
 
 },{timestamps:true});
 

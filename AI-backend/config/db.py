@@ -1,18 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-
-import os
+from pymongo import MongoClient
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+MONGODB_URL = os.getenv("MONGODB_URL")
+DATABASE_NAME = os.getenv("DATABASE_NAME")
 
-engine = create_engine(DATABASE_URL)
+client = MongoClient(MONGODB_URL)
 
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
-Base = declarative_base()
+db = client[DATABASE_NAME]

@@ -154,7 +154,7 @@ export async function login(req, res) {
 
         await sendEmail(
             user.email,
-            "New Login Alert",
+            "Just checking—was this you?",
             "Your account was accessed from a new device.",
             alertHtml
         );
@@ -489,6 +489,7 @@ export async function createTeacherProfile(req, res) {
 
         const teacher = await Teacher.create({
             userId: req.user._id,
+            FullName: req.body.FullName,
             phone: req.body.phone,
             qualification: req.body.qualification,
             specialization: req.body.specialization,
